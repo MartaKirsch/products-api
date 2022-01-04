@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  products_api:
+    container_name: products-api
+    image: node:14.17-alpine
+    restart: on-failure
+    command: sh -c "npm install  && npx prisma migrate deploy && npm run start:dev"
+    ports:
+      - "8080:8080"
+    working_dir: /usr/app
+    volumes:
+      - "./package.json:/usr/app/package.json"
+      - "./package-lock.json:/usr/app/package-lock.json"
+      - "./tsconfig.json:/usr/app/tsconfig.json"
+      - "./tsconfig.build.json:/usr/app/tsconfig.build.json"
+      - "./src:/usr/app/src"
+      - "./prisma:/usr/app/prisma"
+      - "products_api_node_modules:/usr/app/node_modules"
+    environment:
+      CHOKIDAR_USEPOLLING: 1
+      CHOKIDAR_POLLINTERVAL: 3000
+      PORT_BACKEND: 8080
+volumes:
+  products_api_node_modules:
