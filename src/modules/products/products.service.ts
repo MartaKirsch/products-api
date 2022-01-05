@@ -16,4 +16,9 @@ export class ProductsService {
     });
     return product;
   }
+
+  async deleteProduct(id: string) {
+    const product = await this.prisma.product.delete({ where: { id } });
+    return product;
+  }
 }

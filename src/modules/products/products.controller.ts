@@ -1,8 +1,11 @@
 import {
+  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   InternalServerErrorException,
+  Param,
   Post,
 } from "@nestjs/common";
 import { AddProductDto } from "./dto/addProduct.dto";
@@ -28,6 +31,20 @@ export class ProductsController {
       const product = await this.productsService.addProduct(body);
       return { product };
     } catch (e) {
+      throw new InternalServerErrorException(e.message);
+    }
+  }
+
+  @Delete(":id")
+  async deleteProduct(@Param("id") id: string) {
+    try {
+      const product = await this.productsService.deleteProduct(id);
+      return { product };
+    } catch (e) {
+      // if there is no product with given id
+      if (e.code === "P2025")
+        throw new BadRequestException("A product with this id does not exist!");
+
       throw new InternalServerErrorException(e.message);
     }
   }
