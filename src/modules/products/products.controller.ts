@@ -27,6 +27,20 @@ export class ProductsController {
     }
   }
 
+  @Get(":id")
+  async getProductDetails(@Param("id") id: string) {
+    try {
+      const product = await this.productsService.getProduct(id);
+
+      // if there is no product with given id
+      if (!product) throw new Error("A product with this id does not exist!");
+
+      return { product };
+    } catch (e) {
+      throw new InternalServerErrorException(e.message);
+    }
+  }
+
   @Post()
   async addProduct(@Body() body: AddProductDto) {
     try {

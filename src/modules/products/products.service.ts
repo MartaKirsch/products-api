@@ -11,6 +11,11 @@ export class ProductsService {
     return products;
   }
 
+  async getProduct(id: string) {
+    const products = await this.prisma.product.findUnique({ where: { id } });
+    return products;
+  }
+
   async addProduct(data: AddProductDto) {
     const product = await this.prisma.product.create({
       data: { ...data, price: parseFloat(data.price) },
