@@ -8,10 +8,19 @@
 ## Usage
 
 You need Docker to start the project and run one of the following commands from the project root directory.
-#####no console output
+
+##### no console output
+
+```
 docker-compose up -d
-#####with console output
+```
+
+##### with console output
+
+```
 docker-compose up
+```
+
 When the server is up, you can visit http://localhost:8080 or make requests using Postman.
 The project comes with a database that already has a few records.
 
