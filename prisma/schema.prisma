@@ -15,5 +15,5 @@ model Product {
   id           String @id @default(uuid())
   name         String
   price        Float
-  updateDate   DateTime
+  updateDate   DateTime @default(now()) @updatedAt
 }
