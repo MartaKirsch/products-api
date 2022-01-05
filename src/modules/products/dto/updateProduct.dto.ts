@@ -1,7 +1,6 @@
 import {
   IsNotEmpty,
-  IsNumber,
-  IsPositive,
+  IsNumberString,
   IsString,
   MaxLength,
 } from "class-validator";
@@ -16,8 +15,7 @@ export class UpdateProductDto {
   @IsNotEmpty()
   name: string;
 
-  @IsNumber()
+  @IsNumberString({}, { message: "The price must be convertible to a number!" })
   @IsNotEmpty()
-  @IsPositive({ message: "The price cannot be lower than 0!" })
-  price: number;
+  price: string;
 }
