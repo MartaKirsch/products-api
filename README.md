@@ -9,16 +9,16 @@
 
 You need Docker to start the project and run one of the following commands from the project root directory.
 
-##### no console output
+##### development
 
 ```
 docker-compose up -d
 ```
 
-##### with console output
+##### production
 
 ```
-docker-compose up
+docker-compose -f docker-compose.prod.yaml up
 ```
 
 When the server is up, you can visit http://localhost:8080 or make requests using Postman.
