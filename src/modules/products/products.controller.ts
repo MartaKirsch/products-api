@@ -35,7 +35,7 @@ export class ProductsController {
       // if there is no product with given id
       if (!product) throw new Error("A product with this id does not exist!");
 
-      return { product };
+      return { ...product };
     } catch (e) {
       throw new InternalServerErrorException(e.message);
     }
@@ -45,7 +45,7 @@ export class ProductsController {
   async addProduct(@Body() body: AddProductDto) {
     try {
       const product = await this.productsService.addProduct(body);
-      return { product };
+      return { ...product };
     } catch (e) {
       throw new InternalServerErrorException(e.message);
     }
@@ -55,7 +55,7 @@ export class ProductsController {
   async deleteProduct(@Param("id") id: string) {
     try {
       const product = await this.productsService.deleteProduct(id);
-      return { product };
+      return { ...product };
     } catch (e) {
       // if there is no product with given id
       if (e.code === "P2025")
@@ -69,7 +69,7 @@ export class ProductsController {
   async updateProduct(@Body() body: UpdateProductDto) {
     try {
       const product = await this.productsService.updateProduct(body);
-      return { product };
+      return { ...product };
     } catch (e) {
       // if there is no product with given id
       if (e.code === "P2025")

@@ -12,8 +12,8 @@ export class ProductsService {
   }
 
   async getProduct(id: string) {
-    const products = await this.prisma.product.findUnique({ where: { id } });
-    return products;
+    const product = await this.prisma.product.findUnique({ where: { id } });
+    return product;
   }
 
   async addProduct(data: AddProductDto) {
