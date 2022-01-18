@@ -38,4 +38,29 @@ export class ProductsService {
     });
     return product;
   }
+
+  validateAddData(data: any) {
+    //check if the properties exist
+    if (!data.name) throw new Error("The product name must be provided!");
+    if (!data.price) throw new Error("The product price must be provided!");
+
+    //check if name is string of max length = 100
+    if (typeof data.name !== "string" || data.name.length > 100)
+      throw new Error(
+        "The product name must be a set of characters (max length 100 chars)!",
+      );
+
+    //check if price is string
+    if (typeof data.price !== "string")
+      throw new Error(
+        "The price must be a set of characters convertible to a number!",
+      );
+
+    if (isNaN(parseFloat(data.price)))
+      throw new Error(
+        "The price must be a set of characters convertible to a number!",
+      );
+
+    return data as AddProductDto;
+  }
 }

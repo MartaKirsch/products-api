@@ -42,9 +42,18 @@ export class ProductsController {
   }
 
   @Post()
-  async addProduct(@Body() body: AddProductDto) {
+  async addProduct(@Body() body: any) {
+    let data: AddProductDto;
+    //validate data
     try {
-      const product = await this.productsService.addProduct(body);
+      data = await this.productsService.validateAddData(body);
+    } catch (e) {
+      throw new BadRequestException(e.message);
+    }
+
+    //save
+    try {
+      const product = await this.productsService.addProduct(data);
       return { ...product };
     } catch (e) {
       throw new InternalServerErrorException(e.message);
